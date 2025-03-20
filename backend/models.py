@@ -8,4 +8,6 @@ class Scrape_Request(BaseModel):
 
 class Scrape_Response(BaseModel):
     title: str
+    relative_links: List[str]
     html: str
+    screenshot: str
