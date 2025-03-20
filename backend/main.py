@@ -2,12 +2,9 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
 from uuid import UUID, uuid4
-
-
-# Creating pydantic data models
-
+from models import Scrape_Request, Scrape_Response
+from scraper import scrape
 
 # Creating application
 app = FastAPI()
@@ -24,12 +21,16 @@ app.add_middleware(
 )
 
 
-# Creating DB
-
-
 # Creating routes
+@app.post("/scrape", response_model=Scrape_Response)
+async def scrape_url(request: Scrape_Request):
+    response = await scrape(request.url)
+    if response.title:
+        return response
+    else:
+        return {"error": f"Error scraping {request.url}"}
 
 
-# Running the API
+# # Running the API
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=9000)
