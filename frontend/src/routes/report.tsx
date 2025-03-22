@@ -5,5 +5,9 @@ export const Route = createFileRoute("/report")({
 });
 
 function Report() {
-  return <div>Hello "/report"!</div>;
+  return (
+    <div className="[view-transition-name:main-content] h-screen flex flex-col text-center justify-center">
+      <h1>Hello "/report"!</h1>
+    </div>
+  );
 }
