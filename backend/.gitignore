@@ -174,11 +174,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-### FRONTEND ###
-
-node_modules
-.DS_Store
-dist
-dist-ssr
-*.local
