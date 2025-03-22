@@ -3,7 +3,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-between items-center py-4 px-8 border-b fixed top-0 left-0 z-50 w-full">
+    <nav className="flex justify-between items-center py-4 px-8 border-b  w-full">
       <Link to="/" viewTransition={{ types: ["slide-right"] }}>
         <h1 className="text-3xl font-bold">Fast-Scraper</h1>
       </Link>

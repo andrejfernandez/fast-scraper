@@ -9,7 +9,7 @@ from scraper import scrape
 app = FastAPI()
 
 # Adding CORS
-origins = ["http://localhost:5173"]
+origins = ["http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
