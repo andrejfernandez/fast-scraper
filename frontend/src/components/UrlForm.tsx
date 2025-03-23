@@ -14,7 +14,6 @@ export default function UrlForm() {
       search: {
         url: url,
       },
-      viewTransition: { types: ["slide-left"] },
     });
     toast(`Running scrape on ${url}`);
   }

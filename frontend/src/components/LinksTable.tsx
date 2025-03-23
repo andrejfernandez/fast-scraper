@@ -1,40 +1,29 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table";
+import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 
 interface LinksTableProps {
-  title: string;
   links: string[];
 }
 
-export default function LinksTable({ title, links }: LinksTableProps) {
+export default function LinksTable({ links }: LinksTableProps) {
   return (
-    <>
-      <Table className="w-1/3 mt-8">
-        <TableCaption>
-          A list of relative links found on "{title}".
-        </TableCaption>
-        <TableHeader>
+    <Table>
+      <TableBody>
+        {links.map((link) => (
           <TableRow>
-            <TableHead className="w-[100px]">Links</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {links.map((link) => (
-            <TableRow>
-              <TableCell className="font-medium" key={link}>
-                {link}
+            {!link.startsWith("/") ? (
+              <TableCell className="font-medium " key={link}>
+                <a href={link} target="_blank" className="hover:underline">
+                  {link}
+                </a>
               </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </>
+            ) : (
+              <TableCell className="font-medium " key={link}>
+                {link}{" "}
+              </TableCell>
+            )}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

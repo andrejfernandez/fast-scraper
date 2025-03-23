@@ -4,6 +4,7 @@ import axios from "axios";
 
 import type { ScrapeResponse, UrlSearchParam } from "@/lib/types";
 
+import WebsitePreview from "@/components/WebsitePreview";
 import LinksTable from "@/components/LinksTable";
 import Loader from "@/components/Loader";
 
@@ -29,43 +30,46 @@ function Report() {
     },
   });
 
-  const convertToImage = (base64String: string) => {
-    try {
-      if (!base64String.includes("data:image")) {
-        return `data:image/png;base64,${base64String}`;
-      } else {
-        return base64String;
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   if (isPending)
     return (
-      <div className="[view-transition-name:main-content] mt-50 flex flex-col text-center justify-center">
+      <div className="mt-50 flex flex-col text-center justify-center">
         <Loader />
       </div>
     );
 
   if (error)
     return (
-      <div className="[view-transition-name:main-content] h-screen flex flex-col text-center justify-center">
+      <div className="h-screen flex flex-col text-center justify-center">
         <div>{`An error has occurred: + ${error.message}`}</div>
       </div>
     );
 
   return (
-    <div className="[view-transition-name:main-content]">
-      <h1 className="font-semibold text-2xl mt-8">{data.title}</h1>
-      {data.screenshot && (
-        <img
-          src={convertToImage(data.screenshot)}
-          alt="Converted from base64"
-          className="w-1/3 h-auto mt-8"
-        />
-      )}
-      <LinksTable title={data.title} links={data.relative_links} />
+    <div className="mx-20 mt-8 p-10 rounded-lg grid grid-cols-5 ">
+      {/* Title */}
+      <div className="col-span-5 border rounded-t-lg px-4 py-8 text-center">
+        <p className="text-center font-semibold">Report for</p>
+        <h1 className=" text-3xl font-bold ">
+          <a href={search.url} target="_blank" className="hover:underline">
+            {search.url}
+          </a>
+        </h1>
+      </div>
+      {/* Row 1 */}
+      <p className="col-span-1 font-semibold text-end border p-4">Title</p>
+      <p className=" col-span-4 border p-4">{data.title}</p>
+      {/* Row 2 */}
+      <p className="col-span-1 font-semibold text-end border p-4">Screenshot</p>
+      <div className="col-span-4 p-4 border">
+        <WebsitePreview screenshotBase64={data.screenshot} />
+      </div>
+      {/* Row 3 */}
+      <p className="col-span-1 font-semibold text-end border p-4">
+        Relative Links
+      </p>
+      <div className="col-span-4 p-4 border">
+        <LinksTable links={data.relative_links} />
+      </div>
     </div>
   );
 }

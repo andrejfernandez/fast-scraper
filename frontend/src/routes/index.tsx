@@ -7,8 +7,8 @@ export const Route = createFileRoute("/")({
 
 function App() {
   return (
-    <div className="[view-transition-name:main-content] h-screen flex flex-col text-center justify-center">
-      <h1 className="font-bold text-4xl mb-10">Generate an Site Report</h1>
+    <div className="flex flex-col text-center justify-center">
+      <h1 className="font-bold text-4xl mt-64 mb-10">Generate a Site Report</h1>
       <UrlForm />
     </div>
   );
