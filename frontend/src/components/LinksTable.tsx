@@ -18,7 +18,7 @@ export default function LinksTable({ links }: LinksTableProps) {
               </TableCell>
             ) : (
               <TableCell className="font-medium " key={link}>
-                {link}{" "}
+                {link}
               </TableCell>
             )}
           </TableRow>
